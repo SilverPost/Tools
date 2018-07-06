@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="jquery-1.7.1.min.js"></script>
+    </head>
+    <body>
+      <form name="js">
+        北西の緯度<input type="text" name="nw_lat" value="32.25"><br>
+        北西の経度<input type="text" name="nw_long" value="130.75"><br>
+        南東の緯度<input type="text" name="se_lat" value="34.25"><br>
+        南東の経度<input type="text" name="se_long" value="132.75"><br>
+        <br>
+        α係数（0.5秒）<input type="text" name="alpha_0_5" value="6.8"><br>
+        α係数（EEW先）<input type="text" name="alpha_eew" value="4.6"><br>
+        <br>
+        <input type="button" value="入力値消去" onclick="clr()"><br>
+        <input type="button" value="csvデータ表示" onclick="csv()">
+        <br>
+      </form>
+      <div id="csvText"></div>
+      <script>${script}</script>
+    </body>
+</html>
