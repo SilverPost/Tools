@@ -1,4 +1,4 @@
-function csv() {
+function csvAdd() {
   var nw_lat = Number(document.js.nw_lat.value);
   var nw_long = Number(document.js.nw_long.value);
   var se_lat = Number(document.js.se_lat.value);
@@ -14,6 +14,11 @@ function csv() {
       }
     }
   }
+}
+
+function csvInit() {
+  var div = document.getElementById("csvText");
+  div.innerHTML = "";
 }
 
 function clr() {
