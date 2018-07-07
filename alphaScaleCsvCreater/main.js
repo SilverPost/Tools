@@ -7,7 +7,7 @@ function csvAdd() {
   var alpha_eew = Number(document.js.alpha_eew.value);
   
   var div = document.getElementById("csvText");
-  for(var lat = nw_lat; lat <= se_lat; lat += 0.25) {
+  for(var lat = nw_lat; lat >= se_lat; lat -= 0.25) {
     for(var long = nw_long; long <= se_long; long += 0.25) {
       for(var depth = 0; depth <= 100; depth += 20) {
         div.innerHTML = div.innerHTML+lat+","+long+","+depth+","+alpha_0_5+","+alpha_eew+"<br>";
