@@ -9,6 +9,12 @@ function csvAdd() {
   var alpha_0_5 = Number(document.js.alpha_0_5.value);
   var alpha_eew = Number(document.js.alpha_eew.value);
   
+  var err_text = errorText(nw_lat, nw_long, se_lat, se_long, alpha_0_5, alpha_eew);
+  if(err_text !== null) {
+    alert(err_text);
+    return;
+  }
+  
   for(var lat = nw_lat; lat >= se_lat; lat -= 0.25) {
     for(var long = nw_long; long <= se_long; long += 0.25) {
       for(var depth = 0; depth <= 100; depth += 20) {
@@ -18,6 +24,17 @@ function csvAdd() {
     }
   }
   updateInnerHtml(CSV_DATA4DISPLAY);
+}
+
+function errorText(nw_lat, nw_long, se_lat, se_long, alpha_0_5, alpha_eew) {
+  if( nw_lat < se_lat) {
+    return "左上の緯度には、右下の緯度以上の値を入れてください。";
+  }
+  if( se_long < nw_long) {
+    return "左上の経度には、右下の経度以下の値を入れてください。";
+  }
+
+  return null;
 }
 
 function csvInit() {
