@@ -2,11 +2,12 @@
 <html>
     <head>
       <script src="jquery-1.7.1.min.js"></script>
+      <script>${script}</script>
       <style>${style}</style>
     </head>
     <body>
       <p class="title">α係数登録csv 作成ツール ver1.0.0</p>
-      <img src="https://raw.githubusercontent.com/SilverPost/Tools/master/alphaScaleCsvCreater/map.png" class="map" style="position:absolute;top:40px;left:300px;">
+      <img src="https://raw.githubusercontent.com/SilverPost/Tools/master/alphaScaleCsvCreater/map.png" class="map" style="position:absolute;top:50px;left:300px;">
       <form name="js">
         左上の緯度<input type="text" name="nw_lat" value="34.25"><br>
         左上の経度<input type="text" name="nw_long" value="130.75"><br>
@@ -16,11 +17,11 @@
         α係数（P波先）<input type="text" name="alpha_0_5" value="6.8"><br>
         α係数（EEW先）<input type="text" name="alpha_eew" value="4.6"><br>
         <br>
-        <input type="button" value="入力値消去" onclick="clr()"><br>
-        <input type="button" value="csvデータに追加" onclick="csvAdd()">
-        <input type="button" value="csvデータを初期化" onclick="csvInit()"><br>
+        <input type="button" value="csvデータに追加" onclick="csvAdd();">
+        <input type="button" value="入力値消去" onclick="clr();">
+        <input type="button" value="csvデータを初期化" onclick="csvInit();"><br>
+        <a id="download" href="#" onclick="csvSave()">csvデータをファイルに保存</a>
       </form>
       <div id="csvText"></div>
-      <script>${script}</script>
     </body>
 </html>
