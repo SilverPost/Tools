@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <script src="jquery-1.7.1.min.js"></script>
+      <script>var CSV_DATA4DISPLAY = "";
+var CSV_DATA4SAVE = "";
+
+function csvAdd() {
+  var nw_lat = Number(document.js.nw_lat.value);
+  var nw_long = Number(document.js.nw_long.value);
+  var se_lat = Number(document.js.se_lat.value);
+  var se_long = Number(document.js.se_long.value);
+  var alpha_0_5 = Number(document.js.alpha_0_5.value);
+  var alpha_eew = Number(document.js.alpha_eew.value);
+  if(alpha_0_5 === 0) alpha_0_5 = "";
+  if(alpha_eew === 0) alpha_eew = "";
+
+  var err_text = errorText(nw_lat, nw_long, se_lat, se_long, alpha_0_5, alpha_eew);
+  if(err_text !== null) {
+    alert(err_text);
+    return;
+  }
+  
+  for(var lat = nw_lat; lat >= se_lat; lat -= 0.25) {
+    for(var long = nw_long; long <= se_long; long += 0.25) {
+      for(var depth = 0; depth <= 100; depth += 20) {
+        CSV_DATA4DISPLAY = CSV_DATA4DISPLAY+lat+","+long+","+depth+","+alpha_0_5+","+alpha_eew+"<br>";
+        CSV_DATA4SAVE = CSV_DATA4SAVE+lat+","+long+","+depth+","+alpha_0_5+","+alpha_eew+"\n";
+      }
+    }
+  }
+  updateInnerHtml(CSV_DATA4DISPLAY);
+}
+
+function errorText(nw_lat, nw_long, se_lat, se_long, alpha_0_5, alpha_eew) {
+  if(nw_lat < se_lat) {
+    return "左上の緯度には、右下の緯度以上の値を入れてください。";
+  }
+  if(se_long < nw_long) {
+    return "左上の経度には、右下の経度以下の値を入れてください。";
+  }
+  if((alpha_0_5 === "") && (alpha_eew === "")) {
+    return "α係数を少なくともどちらか一方に入力してください。";
+  }
+
+  return null;
+}
+
+function csvInit() {
+  CSV_DATA4DISPLAY = "";
+  updateInnerHtml(CSV_DATA4DISPLAY);
+  CSV_DATA4SAVE = "";
+}
+
+function updateInnerHtml(text) {
+  var div = document.getElementById("csvText");
+  div.innerHTML = text;
+}
+
+function clr() {
+  document.js.nw_lat.value="";
+  document.js.nw_long.value="";
+  document.js.se_lat.value="";
+  document.js.se_long.value="";
+  document.js.alpha_0_5.value="";
+  document.js.alpha_eew.value="";
+}
+
+function csvSave() {
+  outputText(CSV_DATA4SAVE, 'alpha');
+}
+
+function outputText(text, fileName) {
+  var blob = new Blob([ text ], {"type": "text/csv"});
+  if (window.navigator.msSaveBlob) {
+    window.navigator.msSaveBlob(blob, fileName);
+    window.navigator.msSaveOrOpenBlob(blob, fileName);
+  } else {
+    document.getElementById("download").href = window.URL.createObjectURL(blob);
+    document.getElementById("download").download = fileName;
+  }
+}
+</script>
+      <style>html {
+  font-size: 15px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000088;
+  text-decoration: underline;
+}
+
+.note {
+  font-size: 12px;
+  color: #FF3333;
+}
+
+.map {
+  border: 2px #EEEEEE solid;
+  position:absolute;top:50px;
+  left:300px;
+}</style>
+    </head>
+    <body>
+      <p class="title">α係数登録csv 作成ツール ver1.0.0</p>
+      <img src="./map.png" class="map">
+      <form name="js">
+        左上の緯度：<input type="text" name="nw_lat" value="34.25"><br>
+        左上の経度：<input type="text" name="nw_long" value="130.75"><br>
+        右下の緯度：<input type="text" name="se_lat" value="32.25"><br>
+        右下の経度：<input type="text" name="se_long" value="132.75"><br>
+        <p class="note">　Note: 緯度経度は0.25単位で丸め込んで入力</p>
+        α係数（P波先）：<input type="text" name="alpha_0_5" value="6.8"><br>
+        α係数（EEW先）：<input type="text" name="alpha_eew" value="4.6"><br>
+        <br>
+        <input type="button" value="csvデータに追加" onclick="csvAdd();">
+        <input type="button" value="入力値消去" onclick="clr();">
+        <input type="button" value="csvデータを初期化" onclick="csvInit();"><br>
+        <a id="download" href="#" onclick="csvSave()">csvデータをファイルに保存</a>
+      </form>
+      <div id="csvText"></div>
+    </body>
+</html>
