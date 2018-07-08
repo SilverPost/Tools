@@ -16,4 +16,6 @@ html {
 
 .map {
   border: 2px #EEEEEE solid;
+  position:absolute;top:50px;
+  left:300px;
 }
