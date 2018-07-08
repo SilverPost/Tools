@@ -6,3 +6,7 @@ html {
   font-size: 12px;
   color: #FF3333;
 }
+
+.map {
+  border: 2px #EEEEEE solid;
+}
