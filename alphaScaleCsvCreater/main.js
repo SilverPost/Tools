@@ -8,7 +8,9 @@ function csvAdd() {
   var se_long = Number(document.js.se_long.value);
   var alpha_0_5 = Number(document.js.alpha_0_5.value);
   var alpha_eew = Number(document.js.alpha_eew.value);
-  
+  if(alpha_0_5 === 0) alpha_0_5 = "";
+  if(alpha_eew === 0) alpha_eew = "";
+
   var err_text = errorText(nw_lat, nw_long, se_lat, se_long, alpha_0_5, alpha_eew);
   if(err_text !== null) {
     alert(err_text);
