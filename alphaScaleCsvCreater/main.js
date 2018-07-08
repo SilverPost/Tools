@@ -29,11 +29,14 @@ function csvAdd() {
 }
 
 function errorText(nw_lat, nw_long, se_lat, se_long, alpha_0_5, alpha_eew) {
-  if( nw_lat < se_lat) {
+  if(nw_lat < se_lat) {
     return "左上の緯度には、右下の緯度以上の値を入れてください。";
   }
-  if( se_long < nw_long) {
+  if(se_long < nw_long) {
     return "左上の経度には、右下の経度以下の値を入れてください。";
+  }
+  if((alpha_0_5 === "") && (alpha_eew === "")) {
+    return "α係数を少なくともどちらか一方に入力してください。";
   }
 
   return null;
