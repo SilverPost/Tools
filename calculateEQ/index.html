@@ -1,14 +1,58 @@
 <!DOCTYPE html>
 <html>
-    <head>
-      <script>${script}</script>
-      <style>${style}</style>
-    </head>
-    <body>
-      <p class="title">地震解析・計算ツール ver0.0.1</p>
-      <form name="js">
-        震源の緯度：<input type="text" name="epi_lat" value="34.25"><br>
-        震源の経度：<input type="text" name="epi_long" value="130.75"><br>
-      </form>
-    </body>
+  <head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script>${script}</script>
+    <style>${style}</style>
+  </head>
+  <body>
+    <p class="title">地震解析・計算ツール ver0.0.1</p>
+    <form name="js">
+      ■ 1. 地震情報(EEW or 第一検知)<br>
+      <select id="select1" onchange="select1Change();">
+        <option value="0">EEW(手入力)</option>
+        <option value="1">熊本TEC</option>
+        <option value="2">西原村</option>
+      </select>
+      <br>
+       ∟ 震源の緯度：<input type="text" name="epi_lat" value="34.25"><br>
+       ∟ 震源の経度：<input type="text" name="epi_long" value="130.75"><br>
+       ∟ 震源の経度：<input type="text" name="epi_depth" value="10"><br>
+       ∟ マグニチュード：<input type="text" name="epi_mg" value="4"><br>
+      <br>
+      ■ 2. 観測点<br>
+      <select id="select2" onchange="select2Change();">
+        <option value="0">なし</option>
+        <option value="1">熊本TEC</option>
+        <option value="2">西原村</option>
+      </select>
+      <br>
+       ∟ LSの緯度：<input type="text" name="ls_lat"><br>
+       ∟ LSの経度：<input type="text" name="ls_long"><br>
+       ∟ P波加速度：<input type="text" name="ls_pgal"><br>
+      <br>
+      ■ 3. 第一検知<br>
+      <select id="select3" onchange="select3Change();">
+        <option value="0">なし</option>
+        <option value="1">熊本TEC</option>
+        <option value="2">西原村</option>
+      </select>
+      <br>
+       ∟ LSの緯度：<input type="text" name="ls1_lat"><br>
+       ∟ LSの経度：<input type="text" name="ls1_long"><br>
+       ∟ P波加速度：<input type="text" name="ls1_pgal"><br>
+      <br>
+      ■ 4. 第二検知<br>
+      <select id="select4" onchange="select4Change();">
+        <option value="0">なし</option>
+        <option value="1">熊本TEC</option>
+        <option value="2">西原村</option>
+      </select>
+      <br>
+       ∟ LSの緯度：<input type="text" name="ls2_lat"><br>
+       ∟ LSの経度：<input type="text" name="ls2_long"><br>
+       ∟ P波加速度：<input type="text" name="ls2_pgal"><br>
+      <br>
+    </form>
+  </body>
 </html>
